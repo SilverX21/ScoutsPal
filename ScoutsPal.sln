@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.GatewaySolution", "ScoutsPal.GatewaySolution", "{B721B9B5-B4A9-4839-926D-7070AC3166A7}"
+	ProjectSection(SolutionItems) = preProject
+		FAQ.txt = FAQ.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.Services.ScoutsAPI", "ScoutsPal.Services.ScoutsAPI", "{89D2115A-12E5-4AC0-B9AA-A3BC46630156}"
 EndProject
