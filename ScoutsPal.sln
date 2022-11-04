@@ -15,9 +15,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.Services.LogsAPI"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.Services.Identity", "ScoutsPal.Services.Identity", "{E2929501-F8AA-4879-8AE3-4EE3DDDD0837}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teste", "teste", "{3D7F43CC-DF47-41DE-A452-AB273A08B46F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testeConsola", "testeConsola\testeConsola.csproj", "{86B2E3AB-E220-4ABB-9382-6742891CBA88}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86B2E3AB-E220-4ABB-9382-6742891CBA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86B2E3AB-E220-4ABB-9382-6742891CBA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86B2E3AB-E220-4ABB-9382-6742891CBA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86B2E3AB-E220-4ABB-9382-6742891CBA88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86B2E3AB-E220-4ABB-9382-6742891CBA88} = {3D7F43CC-DF47-41DE-A452-AB273A08B46F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {583A4CDE-1FA5-4791-857F-7BFE8B569111}
