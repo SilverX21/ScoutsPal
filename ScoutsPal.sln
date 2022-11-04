@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.GatewaySolution", "ScoutsPal.GatewaySolution", "{B721B9B5-B4A9-4839-926D-7070AC3166A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.Services.ScoutsAPI", "ScoutsPal.Services.ScoutsAPI", "{89D2115A-12E5-4AC0-B9AA-A3BC46630156}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.Services.EventsAPI", "ScoutsPal.Services.EventsAPI", "{C2199754-331E-41AD-9FBC-763697E2539A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.Services.PaymentsAPI", "ScoutsPal.Services.PaymentsAPI", "{1E69F425-2C84-4ED8-BBBD-DFF8E65F38B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.Services.LogsAPI", "ScoutsPal.Services.LogsAPI", "{B5C70C3C-8B7C-4D98-A098-1756734D5258}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScoutsPal.Services.Identity", "ScoutsPal.Services.Identity", "{E2929501-F8AA-4879-8AE3-4EE3DDDD0837}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {583A4CDE-1FA5-4791-857F-7BFE8B569111}
+	EndGlobalSection
+EndGlobal
