@@ -1,3 +1,5 @@
 This is a little FAQ for implementation :)
 
 JSON to .NET object: https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/how-to?pivots=dotnet-6-0
+
+RestSharp requests: https://www.c-sharpcorner.com/article/restsharp-in-net-6-0/

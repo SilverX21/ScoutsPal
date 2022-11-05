@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-//using Newtonsoft.Json;
+﻿//using Newtonsoft.Json;
 using RestSharp;
 using System.Text.Json;
 using testeConsola;
