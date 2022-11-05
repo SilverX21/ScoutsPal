@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace testeConsola
 {
-    public class RestClient
+    public class ScoutsRestClient
     {
         public string? statusCode { get; set; }
         public string? description { get; set; }
