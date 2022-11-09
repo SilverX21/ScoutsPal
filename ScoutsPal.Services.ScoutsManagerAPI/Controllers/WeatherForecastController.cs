@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ScoutsPal.Services.ScoutsManagerAPI.Controllers
+namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

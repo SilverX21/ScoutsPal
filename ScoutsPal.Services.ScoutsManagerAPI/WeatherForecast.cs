@@ -1,4 +1,4 @@
-namespace ScoutsPal.Services.ScoutsManagerAPI
+namespace ScoutsPAl.Services.ScoutsManagerAPI
 {
     public class WeatherForecast
     {
