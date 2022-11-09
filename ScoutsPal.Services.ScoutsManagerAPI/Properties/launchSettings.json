@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "ScoutsPal.Services.ScoutsManagerAPI": {
+    "ScoutsPAl.Services.ScoutsManagerAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7295;http://localhost:5176"
+      "applicationUrl": "https://localhost:7102;http://localhost:5210"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -31,8 +31,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:31281",
-      "sslPort": 44324
+      "applicationUrl": "http://localhost:41766",
+      "sslPort": 44387
     }
   }
 }
