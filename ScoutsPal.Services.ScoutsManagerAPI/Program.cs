@@ -3,7 +3,6 @@ using ScoutsPAl.Services.ScoutsManagerAPI.DbContexts;
 using ScoutsPAl.Services.ScoutsManagerAPI.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
-//var teste = new ConfigurationHelper(builder).GetConnectionString();
 
 // Add services to the container.
 
