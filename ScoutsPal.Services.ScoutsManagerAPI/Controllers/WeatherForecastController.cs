@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ScoutsPAl.Services.ScoutsManagerAPI.Helpers;
 
 namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 {
@@ -21,6 +22,8 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            //var conf = new ConfigurationHelper().GetConnectionString();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
