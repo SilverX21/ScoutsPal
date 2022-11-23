@@ -10,5 +10,6 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.DbContexts
         }
 
         public DbSet<Scout> Scouts { get; set; }
+        public DbSet<ScoutType> ScoutTypes { get; set; }
     }
 }
