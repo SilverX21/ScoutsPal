@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ScoutsPAl.Services.ScoutsManagerAPI.Services.Interfaces;
 
 namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]/[action]")]
     public class ScoutController : ControllerBase
     {
         private readonly ILogger<ScoutController> _logger;
+        private readonly IScoutRepository _scoutRepository;
 
-        public ScoutController(ILogger<ScoutController> logger)
+        public ScoutController(IScoutRepository scoutRepository, ILogger<ScoutController> logger)
         {
             _logger = logger;
+            _scoutRepository = scoutRepository;
         }
 
         /// <summary>
@@ -22,7 +25,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetScoutsByType(int scoutTypeId)
         {
-            if (scoutTypeId < 0)
+            if (scoutTypeId <= 0)
             {
                 _logger.LogWarning($"ScoutsController: The user inputed an invalid ScoutTypeId");
                 return BadRequest("There was a problem getting the scouts you've requested");
@@ -30,11 +33,9 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
             try
             {
-                //logica dos scouts
-                var response = "";
-                //logica dos scouts
+                var response = _scoutRepository.GetScoutsByType(scoutTypeId);
 
-                if (response == null)
+                if (response == null || !response.Any())
                 {
                     _logger.LogWarning($"ScoutsController: The user inputed an invalid ScoutTypeId");
                     return BadRequest("There was a problem getting the data you've requested, please try again.");
@@ -51,7 +52,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
         // GET: Scout/Details/5
         [HttpGet]
-        public ActionResult Details(int scoutId)
+        public ActionResult GetScoutDetails(int scoutId)
         {
             if (scoutId < 0)
             {
@@ -80,67 +81,67 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
             }
         }
 
-        // GET: Scout/Create
-        public ActionResult Create()
-        {
-            return Ok();
-        }
+        //// GET: Scout/Create
+        //public ActionResult Create()
+        //{
+        //    return Ok();
+        //}
 
-        // POST: Scout/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return Ok();
-            }
-        }
+        //// POST: Scout/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return Ok();
+        //    }
+        //}
 
-        // GET: Scout/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return Ok();
-        }
+        //// GET: Scout/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return Ok();
+        //}
 
-        // POST: Scout/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return Ok();
-            }
-        }
+        //// POST: Scout/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return Ok();
+        //    }
+        //}
 
-        // GET: Scout/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return Ok();
-        }
+        //// GET: Scout/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return Ok();
+        //}
 
-        // POST: Scout/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return Ok();
-            }
-        }
+        //// POST: Scout/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return Ok();
+        //    }
+        //}
     }
 }
