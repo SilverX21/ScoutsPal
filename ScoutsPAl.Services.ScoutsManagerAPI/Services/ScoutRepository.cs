@@ -25,6 +25,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scout == null)
             {
+                _logger.LogWarning("ScoutRepository: The inputed data is null");
                 return false;
             }
 
@@ -32,17 +33,20 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             {
                 if (ExistsScout(scout.ScoutId))
                 {
+                    _logger.LogWarning("ScoutRepository: Scout doesn't exist!");
                     return false;
                 }
+
+                _dbContext.Scouts.Add(scout);
+                _dbContext.SaveChanges();
+                _logger.LogInformation("ScoutRepository: The scout was created!");
+                return true;
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "ScoutRepository: There was a problem during the execution");
                 return false;
             }
-
-            _dbContext.Scouts.Add(scout);
-            _dbContext.SaveChanges();
-            return true;
         }
 
         /// <summary>
@@ -55,6 +59,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scout == null)
             {
+                _logger.LogWarning("ScoutRepository: The inputed data is null");
                 return false;
             }
 
@@ -62,15 +67,18 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             {
                 if (!ExistsScout(scout.ScoutId))
                 {
+                    _logger.LogWarning("ScoutRepository: The scout doesn't exist!");
                     return false;
                 }
 
                 _dbContext.Scouts.Remove(scout);
                 _dbContext.SaveChanges();
+                _logger.LogInformation("ScoutRepository: The scout was removed!");
                 return true;
             }
             catch (Exception ex)
             {
+                _logger.LogWarning(ex.Message, "ScoutRepository: There was a problem during the execution");
                 return false;
             }
         }
@@ -84,6 +92,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scout == null)
             {
+                _logger.LogWarning("ScoutRepository: The inputed data is null");
                 return false;
             }
 
@@ -91,15 +100,18 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             {
                 if (!ExistsScout(scout.ScoutId))
                 {
+                    _logger.LogWarning("ScoutRepository: The scout doesn't exist!");
                     return false;
                 }
 
                 _dbContext.Scouts.Update(scout);
                 _dbContext.SaveChanges();
+                _logger.LogInformation("ScoutRepository: The scout info was updated!");
                 return true;
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "ScoutRepository: There was a problem during the execution");
                 return false;
             }
         }
@@ -113,9 +125,11 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scoutId <= 0)
             {
+                _logger.LogWarning("ScoutRepository: The inputed data is not valid");
                 return false;
             }
 
+            _logger.LogInformation("ScoutRepository: confirmed scout existence!");
             return _dbContext.Scouts.Any(x => x.ScoutId == scoutId);
         }
 
@@ -131,6 +145,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "ScoutRepository: There was a problem during the execution!");
                 return null;
             }
         }
@@ -144,6 +159,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scoutId <= 0)
             {
+                _logger.LogWarning("ScoutRepository: The inputed data isn't valid!");
                 return null;
             }
 
@@ -151,13 +167,16 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             {
                 if (!ExistsScout(scoutId))
                 {
+                    _logger.LogWarning("ScoutRepository: The scout doesn't exist!");
                     return null;
                 }
 
+                _logger.LogInformation("ScoutRepository: Fetched the scout info!");
                 return _dbContext.Scouts.FirstOrDefault(x => x.ScoutId == scoutId);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "ScoutRepository: There was a problem during the execution!");
                 return null;
             }
         }
@@ -173,9 +192,11 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
 
             if (groupId <= 0)
             {
+                _logger.LogWarning("ScoutRepository: The inputed data isn't valid!");
                 return scoutsList;
             }
 
+            _logger.LogInformation("ScoutRepository: Fetched some scouts by group!");
             scoutsList = _dbContext.Scouts.Where(x => x.GroupId == groupId).ToList();
 
             return scoutsList;
@@ -192,9 +213,11 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
 
             if (scoutType <= 0)
             {
+                _logger.LogWarning("ScoutRepository: The inputed data isn't valid!");
                 return scoutsList;
             }
 
+            _logger.LogWarning("ScoutRepository: Fetched some scouts by group!");
             scoutsList = _dbContext.Scouts.Where(x => x.ScoutTypeId == scoutType).ToList();
 
             return scoutsList;
@@ -209,6 +232,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scoutId <= 0)
             {
+                _logger.LogWarning("ScoutRepository: The inputed data isn't valid!");
                 return false;
             }
 
