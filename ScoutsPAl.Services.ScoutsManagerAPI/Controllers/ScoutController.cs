@@ -41,7 +41,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (response == null || !response.Any())
                 {
-                    _logger.LogWarning($"ScoutsController: There wasn't any data found");
+                    _logger.LogError($"ScoutsController: There wasn't any data found");
                     return BadRequest(new { statusCode = StatusCodes.Status404NotFound, message = "There was a problem getting the data you've requested, please try again." });
                 }
 
@@ -77,7 +77,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (response == null)
                 {
-                    _logger.LogWarning($"ScoutsController: The requested scout wasn't found ");
+                    _logger.LogError($"ScoutsController: The requested scout wasn't found ");
                     return BadRequest(new { statusCode = StatusCodes.Status404NotFound, message = "There was a problem getting the scouts you've requested" });
                 }
 
@@ -114,7 +114,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (!response)
                 {
-                    _logger.LogWarning($"ScoutsController: The user inputed an invalid scoutId");
+                    _logger.LogError($"ScoutsController: The user inputed an invalid scoutId");
                     return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "There was a problem creating the scout. Please input valid data" });
                 }
 
@@ -151,7 +151,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (!response)
                 {
-                    _logger.LogWarning($"ScoutsController: The user inputed an invalid scout");
+                    _logger.LogError($"ScoutsController: The user inputed an invalid scout");
                     return BadRequest(new { statusCode = StatusCodes.Status404NotFound, message = "There was a problem editing the scout you've requested. Please input valid data" });
                 }
 
@@ -185,7 +185,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (!response)
                 {
-                    _logger.LogWarning($"ScoutsController: It wasn't possible to delete the required scout!");
+                    _logger.LogError($"ScoutsController: It wasn't possible to delete the required scout!");
                     return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "It wasn't possible to delete the requested scout. Please try again!" });
                 }
 

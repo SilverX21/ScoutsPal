@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen(c =>
 
 //DI
 builder.Services.AddScoped<IScoutRepository, ScoutRepository>();
+builder.Services.AddScoped<IScoutTypeRepository, ScoutTypeRepository>();
 
 var app = builder.Build();
 
