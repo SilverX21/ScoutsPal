@@ -2,18 +2,20 @@
 using ScoutsPAl.Services.ScoutsManagerAPI.DbContexts;
 using ScoutsPAl.Services.ScoutsManagerAPI.Models;
 using ScoutsPAl.Services.ScoutsManagerAPI.Services.Interfaces;
+using Serilog;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
 {
     public class ScoutTypeRepository : IScoutTypeRepository
     {
-        private readonly ILogger<ScoutTypeRepository> _logger;
         private readonly ApplicationDbContext _dbContext;
+        private readonly Serilog.ILogger _serilogLogger;
 
-        public ScoutTypeRepository(ILogger<ScoutTypeRepository> logger, ApplicationDbContext dbContext)
+        public ScoutTypeRepository(ApplicationDbContext dbContext)
         {
-            _logger = logger;
             _dbContext = dbContext;
+            _serilogLogger = Log.ForContext<ScoutTypeRepository>();
         }
 
         /// <summary>
@@ -25,6 +27,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scoutType == null)
             {
+                _serilogLogger.Warning("ScoutTypeRepository: The inputed data is null");
                 return false;
             }
 
@@ -32,17 +35,20 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             {
                 if (ExistsScoutType(scoutType.ScoutTypeId))
                 {
+                    _serilogLogger.Warning("ScoutTypeRepository: the scout type doesn't exist!");
                     return false;
                 }
+
+                _dbContext.ScoutTypes.Add(scoutType);
+                _dbContext.SaveChanges();
+                _serilogLogger.Information("ScoutTypeRepository: The scout type was created!");
+                return true;
             }
             catch (Exception ex)
             {
+                _serilogLogger.Error(ex.Message, "ScoutTypeRepository: There was a problem during the execution");
                 return false;
             }
-
-            _dbContext.ScoutTypes.Add(scoutType);
-            _dbContext.SaveChanges();
-            return true;
         }
 
         /// <summary>
@@ -54,6 +60,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scoutType == null)
             {
+                _serilogLogger.Warning("ScoutTypeRepository: The inputed data is null");
                 return false;
             }
 
@@ -61,15 +68,18 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             {
                 if (!ExistsScoutType(scoutType.ScoutTypeId))
                 {
+                    _serilogLogger.Warning("ScoutTypeRepository: The scout type doesn't exist!");
                     return false;
                 }
 
                 _dbContext.ScoutTypes.Remove(scoutType);
                 _dbContext.SaveChanges();
+                _serilogLogger.Information("ScoutTypeRepository: The scout type was deleted!");
                 return true;
             }
             catch (Exception ex)
             {
+                _serilogLogger.Error(ex.Message, "ScoutTypeRepository: There was a problem during the execution");
                 return false;
             }
         }
@@ -83,6 +93,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scoutType == null)
             {
+                _serilogLogger.Warning("ScoutTypeRepository: The inputed data is null");
                 return false;
             }
 
@@ -90,15 +101,18 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             {
                 if (!ExistsScoutType(scoutType.ScoutTypeId))
                 {
+                    _serilogLogger.Warning("ScoutTypeRepository: The scout type doesn't exist!");
                     return false;
                 }
 
                 _dbContext.ScoutTypes.Update(scoutType);
                 _dbContext.SaveChanges();
+                _serilogLogger.Information("ScoutTypeRepository: The scout type was updated!");
                 return true;
             }
             catch (Exception ex)
             {
+                _serilogLogger.Error(ex.Message, "ScoutTypeRepository: There was a problem during the execution");
                 return false;
             }
         }
@@ -112,9 +126,11 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scoutTypeId <= 0)
             {
+                _serilogLogger.Warning("ScoutTypeRepository: The inputed data is invalid");
                 return false;
             }
 
+            _serilogLogger.Information("ScoutTypeRepository: The scout type was fetched!");
             return _dbContext.ScoutTypes.Any(x => x.ScoutTypeId == scoutTypeId);
         }
 
@@ -126,10 +142,12 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             try
             {
+                _serilogLogger.Information("ScoutTypeRepository: It was fetched some scout type data!");
                 return _dbContext.ScoutTypes.ToList();
             }
             catch (Exception ex)
             {
+                _serilogLogger.Error(ex.Message, "ScoutTypeRepository: There was a problem during the execution");
                 return null;
             }
         }
@@ -143,6 +161,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         {
             if (scoutTypeId <= 0)
             {
+                _serilogLogger.Warning("ScoutTypeRepository: The inputed data is invalid");
                 return null;
             }
 
@@ -150,13 +169,16 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             {
                 if (!ExistsScoutType(scoutTypeId))
                 {
+                    _serilogLogger.Warning("ScoutTypeRepository: The scout type doesn't exist!");
                     return null;
                 }
 
+                _serilogLogger.Information("ScoutTypeRepository: The scout type details were fetched!");
                 return _dbContext.ScoutTypes.FirstOrDefault(x => x.ScoutTypeId == scoutTypeId);
             }
             catch (Exception ex)
             {
+                _serilogLogger.Error(ex.Message, "ScoutTypeRepository: There was a problem during the execution");
                 return null;
             }
         }

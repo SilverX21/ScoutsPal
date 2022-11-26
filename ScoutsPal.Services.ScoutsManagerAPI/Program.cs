@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
 using ScoutsPAl.Services.ScoutsManagerAPI.DbContexts;
 using ScoutsPAl.Services.ScoutsManagerAPI.Helpers;
 using ScoutsPAl.Services.ScoutsManagerAPI.Services;
 using ScoutsPAl.Services.ScoutsManagerAPI.Services.Interfaces;
+using Serilog;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +26,15 @@ builder.Services.AddSwaggerGen(c =>
 //DI
 builder.Services.AddScoped<IScoutRepository, ScoutRepository>();
 builder.Services.AddScoped<IScoutTypeRepository, ScoutTypeRepository>();
+
+string logsPath = "C:\\Logs_ScoutsPal";
+DirectoryInfo di = Directory.CreateDirectory(logsPath); //creates logs folder
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.File($"{logsPath}\\ScoutsPal_logs.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+Log.Information("ScoutsPal App: started!");
 
 var app = builder.Build();
 

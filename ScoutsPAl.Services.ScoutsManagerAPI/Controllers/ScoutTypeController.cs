@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ScoutsPAl.Services.ScoutsManagerAPI.Models;
 using ScoutsPAl.Services.ScoutsManagerAPI.Services.Interfaces;
+using Serilog;
 
 namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 {
@@ -9,13 +10,13 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class ScoutTypeController : ControllerBase
     {
-        private readonly ILogger<ScoutTypeController> _logger;
         private readonly IScoutTypeRepository _scoutTypeRepository;
+        private readonly Serilog.ILogger _serilogLogger;
 
-        public ScoutTypeController(IScoutTypeRepository scoutTypeRepository, ILogger<ScoutTypeController> logger)
+        public ScoutTypeController(IScoutTypeRepository scoutTypeRepository)
         {
-            _logger = logger;
             _scoutTypeRepository = scoutTypeRepository;
+            _serilogLogger = Log.ForContext<ScoutTypeController>();
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         {
             if (scoutTypeId < 0)
             {
-                _logger.LogWarning($"ScoutTypeController: The user inputed an invalid scout type id");
+                _serilogLogger.Warning($"ScoutTypeController: The user inputed an invalid scout type id");
                 return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "There was a problem getting the scout type details you've requested" });
             }
 
@@ -41,7 +42,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (response == null)
                 {
-                    _logger.LogError($"ScoutTypeController: The requested scout type wasn't found ");
+                    _serilogLogger.Error($"ScoutTypeController: The requested scout type wasn't found ");
                     return BadRequest(new { statusCode = StatusCodes.Status404NotFound, message = "There was a problem getting the scout types you've requested" });
                 }
 
@@ -49,7 +50,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "There was a problem getting the data for getting the scout type required!");
+                _serilogLogger.Error(ex, "There was a problem getting the data for getting the scout type required!");
                 return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "There was a problem getting the scout type details you've requested" });
             }
         }
@@ -68,7 +69,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         {
             if (scoutType == null)
             {
-                _logger.LogWarning($"ScoutTypeController: The user inputed some invalid data!");
+                _serilogLogger.Warning($"ScoutTypeController: The user inputed some invalid data!");
                 return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "There was a problem creating the scout type. Please input valid data" });
             }
 
@@ -78,7 +79,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (!response)
                 {
-                    _logger.LogError($"ScoutTypeController: The user inputed an invalid scoutTypeId");
+                    _serilogLogger.Error($"ScoutTypeController: The user inputed an invalid scoutTypeId");
                     return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "There was a problem creating the scout type. Please input valid data" });
                 }
 
@@ -86,7 +87,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "There was a problem getting the data for getting the scout type required!");
+                _serilogLogger.Error(ex, "There was a problem getting the data for getting the scout type required!");
                 return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "There was a problem creating the scout type. Please try again" });
             }
         }
@@ -105,7 +106,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         {
             if (scoutType == null)
             {
-                _logger.LogWarning($"ScoutTypeController: The user inputed an invalid scout type");
+                _serilogLogger.Warning($"ScoutTypeController: The user inputed an invalid scout type");
                 return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "There was a problem editing the scout type you've requested. Please input valid data" });
             }
 
@@ -115,7 +116,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (!response)
                 {
-                    _logger.LogError($"ScoutTypeController: The user inputed an invalid scout type");
+                    _serilogLogger.Error($"ScoutTypeController: The user inputed an invalid scout type");
                     return BadRequest(new { statusCode = StatusCodes.Status404NotFound, message = "There was a problem editing the scout type you've requested. Please input valid data" });
                 }
 
@@ -123,7 +124,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "There was a problem editing the data of the required scout type!");
+                _serilogLogger.Error(ex, "There was a problem editing the data of the required scout type!");
                 return BadRequest(new { statusCode = StatusCodes.Status404NotFound, message = "There was a problem editing the scout type you've requested. Please input valid data" });
             }
         }
@@ -139,7 +140,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         {
             if (scoutType == null)
             {
-                _logger.LogWarning($"ScoutTypeController: The user inputed an invalid scout type");
+                _serilogLogger.Warning($"ScoutTypeController: The user inputed an invalid scout type");
                 return BadRequest(new { statusCode = StatusCodes.Status404NotFound, message = "Scout type data invalid. Please insert valid scout data!" });
             }
 
@@ -149,7 +150,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
 
                 if (!response)
                 {
-                    _logger.LogError($"ScoutTypeController: It wasn't possible to delete the required scout type!");
+                    _serilogLogger.Error($"ScoutTypeController: It wasn't possible to delete the required scout type!");
                     return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "It wasn't possible to delete the requested scout type. Please try again!" });
                 }
 
@@ -157,7 +158,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "There was a problem deleting the scout type data!");
+                _serilogLogger.Error(ex, "There was a problem deleting the scout type data!");
                 return BadRequest(new { statusCode = StatusCodes.Status400BadRequest, message = "It wasn't possible to delete the requested scout type. Please try again!" });
             }
         }
