@@ -119,9 +119,20 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
             return _dbContext.Scouts.Any(x => x.ScoutId == scoutId);
         }
 
+        /// <summary>
+        /// Gets a list of all scouts
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Scout> GetAllScout()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _dbContext.Scouts.ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -129,7 +140,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
         /// </summary>
         /// <param name="scoutId"></param>
         /// <returns></returns>
-        public Scout GetScoutDetails(int scoutId)
+        public Scout GetScoutDetails(long scoutId)
         {
             if (scoutId <= 0)
             {

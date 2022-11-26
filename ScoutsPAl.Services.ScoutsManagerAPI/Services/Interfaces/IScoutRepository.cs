@@ -11,7 +11,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services.Interfaces
 
         public IEnumerable<Scout> GetScoutsByGroup(int groupId);
 
-        public Scout GetScoutDetails(int scoutId);
+        public Scout GetScoutDetails(long scoutId);
 
         public bool CreateScout(Scout scout);
 
