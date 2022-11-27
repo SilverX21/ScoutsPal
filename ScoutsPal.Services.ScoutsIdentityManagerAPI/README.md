@@ -3,7 +3,11 @@ This is a FAQ for our project :)
 Bellow we'll have the steps we've covered to build this API:
 
 1- added the following packages:
-- 
+- Duende.Identity.Server.AspNetIdentity by Duende Software version 5.1.1
+- Microsoft.EntityFrameworkCore.SqlServer by Microsoft version 6.11.0
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore by Microsoft version 6.11.0
+- Microsoft.AspNetCore.Identity.UI by Microsoft version 6.11.0
+- Microsoft.EntityFrameworkCore.Tools by Microsoft version 6.11.0
 
 2- Added the folder DbContext
 2.1- added the class ApplicationDbContext and inserted this code:
