@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ScoutsPal.Services.ScoutsIdentityManagerAPI.Models;
 
-namespace ScoutsPAl.Services.ScoutsManagerAPI.DbContexts
+namespace ScoutsPal.Services.ScoutsIdentityManagerAPI.DbContexts
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
