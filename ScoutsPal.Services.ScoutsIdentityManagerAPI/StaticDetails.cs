@@ -36,9 +36,9 @@ namespace ScoutsPal.Services.ScoutsIdentityManagerAPI
                     //Include secret on a web config
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "https://localhost:7107/signin-oidc"},
+                    RedirectUris = { "https://localhost:44348/signin-oidc"},
 
-                    PostLogoutRedirectUris = { "https://localhost:7107/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:44348/signout-callback-oidc" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
