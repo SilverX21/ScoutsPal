@@ -32,13 +32,20 @@ namespace ScoutsPal.Services.ScoutsIdentityManagerAPI
             {
                 new Client
                 {
+                    ClientId="client",
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes = {"read", "write", "profile"},
+                },
+                new Client
+                {
                     ClientId="scout",
                     //Include secret on a web config
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "https://localhost:44348/signin-oidc"},
+                    RedirectUris = { "https://localhost:7051/signin-oidc"},
 
-                    PostLogoutRedirectUris = { "https://localhost:44348/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:7051/signout-callback-oidc" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
