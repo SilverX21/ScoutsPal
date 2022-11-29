@@ -16,16 +16,16 @@ namespace ScoutsPal.Web.Controllers
             _serilogLogger = Log.ForContext<HomeController>();
         }
 
-        public IActionResult Index(string token = "")
+        public IActionResult Index()
         {
-            if (!string.IsNullOrEmpty(token))
-            {
-                ViewBag["accessToken"] = token;
-            }
-            else
-            {
-                ViewBag["accessToken"] = string.Empty;
-            }
+            //if (!string.IsNullOrEmpty(token))
+            //{
+            //    ViewBag["accessToken"] = token;
+            //}
+            //else
+            //{
+            //    ViewBag["accessToken"] = string.Empty;
+            //}
            return View();
         }
 
@@ -44,7 +44,9 @@ namespace ScoutsPal.Web.Controllers
         public async Task<IActionResult> Login()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            return RedirectToAction("Index", new { accessToken = accessToken });
+            //return RedirectToAction("Index", new { accessToken = accessToken });
+            return RedirectToAction(nameof(Index));
+
         }
         public IActionResult Logout()
         {

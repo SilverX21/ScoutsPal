@@ -2,7 +2,7 @@
 {
     public class StaticDetails
     {
-        //public static string ProductAPIBase { get; set; }
+        public static string ScoutManagementAPIBase { get; set; }
 
         public enum APIType
         {
