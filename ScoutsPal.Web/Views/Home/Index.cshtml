@@ -4,5 +4,12 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    @if(User.Identity.IsAuthenticated)
+    {
+        
+    }else
+    {
+        <p>To see your token you need to authenticate</p>
+    }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

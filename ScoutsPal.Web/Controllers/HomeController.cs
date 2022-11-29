@@ -18,14 +18,7 @@ namespace ScoutsPal.Web.Controllers
 
         public IActionResult Index()
         {
-            //if (!string.IsNullOrEmpty(token))
-            //{
-            //    ViewBag["accessToken"] = token;
-            //}
-            //else
-            //{
-            //    ViewBag["accessToken"] = string.Empty;
-            //}
+            
            return View();
         }
 

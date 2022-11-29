@@ -1,9 +1,11 @@
+using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ScoutsPal.Services.ScoutsIdentityManagerAPI;
 using ScoutsPal.Services.ScoutsIdentityManagerAPI.DbContexts;
 using ScoutsPal.Services.ScoutsIdentityManagerAPI.Initializer;
 using ScoutsPal.Services.ScoutsIdentityManagerAPI.Models;
+using ScoutsPal.Services.ScoutsIdentityManagerAPI.Services;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,6 +53,9 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
+//Inset Type of profile on access Token
+builder.Services.AddScoped<IProfileService, ProfileService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
