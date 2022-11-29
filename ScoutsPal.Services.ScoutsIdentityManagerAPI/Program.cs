@@ -4,6 +4,7 @@ using ScoutsPal.Services.ScoutsIdentityManagerAPI;
 using ScoutsPal.Services.ScoutsIdentityManagerAPI.DbContexts;
 using ScoutsPal.Services.ScoutsIdentityManagerAPI.Initializer;
 using ScoutsPal.Services.ScoutsIdentityManagerAPI.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,21 +18,50 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.AddIdentityServer(options =>
 {
+
     options.Events.RaiseErrorEvents = true;
     options.Events.RaiseInformationEvents = true;
     options.Events.RaiseFailureEvents = true;
     options.Events.RaiseSuccessEvents = true;
     options.EmitStaticAudienceClaim = true;
+    
 }).AddInMemoryIdentityResources(StaticDetails.IdentityResources)
 .AddInMemoryApiScopes(StaticDetails.ApiScopes)
 .AddInMemoryClients(StaticDetails.Clients)
-.AddAspNetIdentity<ApplicationUser>()
+.AddAspNetIdentity<ApplicationUser>() 
 .AddDeveloperSigningCredential();
+builder.Services.AddAuthentication().AddCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+  
+});
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+});
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    
+    // Lockout settings.
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    options.Lockout.MaxFailedAccessAttempts = 3;
+    options.Lockout.AllowedForNewUsers = true;
+});
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+string logsPath = "C:\\Logs_ScoutsPal";
+DirectoryInfo di = Directory.CreateDirectory(logsPath); //creates logs folder
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.File($"{logsPath}\\ScoutsPal_logs.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+Log.Information("ScoutsPalIdentity App: started!");
 
 var app = builder.Build();
 
