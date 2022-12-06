@@ -16,7 +16,7 @@ namespace ScoutsPal.Services.EventsManagerAPI.Services.Interfaces
 
         public bool DeleteNews(News news);
 
-        public bool ExistsNewsForEvent(long eventId);
+        public bool ExistsNewsForEvent(long newsId);
 
         public bool ExistsNews(long newsId);
 

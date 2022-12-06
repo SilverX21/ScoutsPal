@@ -187,18 +187,27 @@ namespace ScoutsPal.Services.EventsManagerAPI.Services
         /// <returns></returns>
         public IEnumerable<Event> GetEventsByGroup(int groupId)
         {
-            List<Event> scoutsList = new List<Event>();
+            List<Event> eventsList = new List<Event>();
 
             if (groupId <= 0)
             {
                 _serilogLogger.Warning("EventRepository: The inputed data isn't valid!");
-                return scoutsList;
+                return eventsList;
             }
 
-            _serilogLogger.Information("EventRepository: Fetched some events by group!");
-            scoutsList = _dbContext.Events.Where(x => x.EventId == groupId).ToList();
+            try
+            {
+                eventsList = _dbContext.Events.Where(x => x.EventId == groupId).ToList();
+                _serilogLogger.Information("EventRepository: Fetched some events by group!");
+                return eventsList;
+            }
+            catch (Exception ex)
+            {
+                _serilogLogger.Error(ex.Message, "EventRepository: There was a problem during the execution!");
+                return null;
+            }
 
-            return scoutsList;
+            
         }
 
         /// <summary>
