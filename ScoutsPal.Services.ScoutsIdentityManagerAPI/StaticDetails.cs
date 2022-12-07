@@ -3,7 +3,7 @@ using Duende.IdentityServer;
 
 namespace ScoutsPal.Services.ScoutsIdentityManagerAPI
 {
-    public class StaticDetails
+    public static class StaticDetails
     {
         /// <summary>
         /// Admin users and Normal Users
