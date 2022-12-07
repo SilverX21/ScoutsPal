@@ -35,7 +35,6 @@ builder.Services.AddIdentityServer(options =>
 builder.Services.AddAuthentication().AddCookie(options =>
 {
     options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
-  
 });
 
 builder.Services.AddSession(options =>
@@ -45,10 +44,9 @@ builder.Services.AddSession(options =>
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    
     // Lockout settings.
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
-    options.Lockout.MaxFailedAccessAttempts = 3;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15); //will lock the user for 15 minutes 
+    options.Lockout.MaxFailedAccessAttempts = 3; //has a max of to try the auth for 3 times before locking 
     options.Lockout.AllowedForNewUsers = true;
 });
 

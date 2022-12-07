@@ -41,7 +41,7 @@ namespace ScoutsPal.Services.ScoutsIdentityManagerAPI
                 {
                     ClientId="scout",
                     //Include secret on a web config
-                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    ClientSecrets = { new Secret("secret".Sha256()) }, //the algorithm that will be used to encrypt the password
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris = { "https://localhost:7107/signin-oidc"},
 
