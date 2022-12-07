@@ -203,7 +203,7 @@ namespace ScoutsPal.Services.EventsManagerAPI.Services
         /// </summary>
         /// <param name="groupId"></param>
         /// <returns></returns>
-        public IEnumerable<News> GetNewsByGroup(int groupId)
+        public IEnumerable<News> GetNewsByGroup(long groupId)
         {
             List<News> newsList = new List<News>();
 

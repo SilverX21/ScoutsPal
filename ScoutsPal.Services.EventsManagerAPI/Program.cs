@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ScoutsPal.Services.EventsManagerAPI.DbContexts;
 using ScoutsPal.Services.EventsManagerAPI.Services;
 using ScoutsPal.Services.EventsManagerAPI.Services.Interfaces;
+using ScoutsPal.Services.EventsManagerAPI.Helpers;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    ScoutsPalConfigurationHelper.AddSwaggerDocumentation(c);
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 });
 

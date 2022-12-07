@@ -11,5 +11,6 @@ namespace ScoutsPal.Services.EventsManagerAPI.DbContexts
         }
         public DbSet<News> News { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<ScoutEvents> ScoutEvents { get; set; }
     }
 }

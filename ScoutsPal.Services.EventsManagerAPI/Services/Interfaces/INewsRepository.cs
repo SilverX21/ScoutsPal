@@ -6,9 +6,9 @@ namespace ScoutsPal.Services.EventsManagerAPI.Services.Interfaces
     {
         public IEnumerable<News> GetAllNews();
 
-        public IEnumerable<News> GetNewsByGroup(int groupId);
+        public IEnumerable<News> GetNewsByGroup(long groupId);
 
-        public News GetNewsDetails(long eventId);
+        public News GetNewsDetails(long newsId);
 
         public bool CreateNews(News news);
 

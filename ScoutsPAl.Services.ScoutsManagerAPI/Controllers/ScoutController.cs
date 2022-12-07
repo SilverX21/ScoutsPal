@@ -172,6 +172,9 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ValidateAntiForgeryToken]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public ActionResult DeleteScout(Scout scout)
         {
             if (scout == null)

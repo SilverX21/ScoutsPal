@@ -20,6 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    ScoutsPalConfigurationHelper.AddSwaggerDocumentation(c);
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 });
 
