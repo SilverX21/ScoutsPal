@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScoutsPAl.Services.ScoutsManagerAPI.Models;
 using ScoutsPAl.Services.ScoutsManagerAPI.Services.Interfaces;
@@ -28,6 +29,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         [ProducesResponseType(200, Type = typeof(ScoutType))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize]
         public IActionResult GetScoutTypeDetails(int scoutTypeId)
         {
             if (scoutTypeId < 0)
@@ -65,6 +67,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         [ProducesResponseType(200, Type = typeof(ScoutType))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize]
         public IActionResult CreateScoutType(ScoutType scoutType)
         {
             if (scoutType == null)
@@ -102,6 +105,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize]
         public ActionResult EditScoutType(ScoutType scoutType)
         {
             if (scoutType == null)
@@ -135,6 +139,7 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Controllers
         /// <param name="scoutType"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteScout(ScoutType scoutType)
         {
