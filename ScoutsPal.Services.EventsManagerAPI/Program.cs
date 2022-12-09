@@ -1,11 +1,10 @@
-using Microsoft.AspNetCore.Hosting.Server;
+using EventsPal.Services.EventsManagerAPI.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using ScoutsPAl.Services.ScoutsManagerAPI.DbContexts;
-using ScoutsPAl.Services.ScoutsManagerAPI.Helpers;
-using ScoutsPAl.Services.ScoutsManagerAPI.Services;
-using ScoutsPAl.Services.ScoutsManagerAPI.Services.Interfaces;
+using ScoutsPal.Services.EventsManagerAPI.DbContexts;
+using ScoutsPal.Services.EventsManagerAPI.Services;
+using ScoutsPal.Services.EventsManagerAPI.Services.Interfaces;
+using ScoutsPal.Services.EventsManagerAPI.Helpers;
 using Serilog;
-using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +24,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 //DI
-builder.Services.AddScoped<IScoutRepository, ScoutRepository>();
-builder.Services.AddScoped<IScoutTypeRepository, ScoutTypeRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
 
 string logsPath = "C:\\Logs_ScoutsPal";
 DirectoryInfo di = Directory.CreateDirectory(logsPath); //creates logs folder

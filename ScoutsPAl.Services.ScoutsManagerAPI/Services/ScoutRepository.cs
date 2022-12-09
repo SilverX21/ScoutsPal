@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Writers;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Writers;
 using ScoutsPAl.Services.ScoutsManagerAPI.DbContexts;
 using ScoutsPAl.Services.ScoutsManagerAPI.Models;
 using ScoutsPAl.Services.ScoutsManagerAPI.Services.Interfaces;
@@ -237,9 +238,18 @@ namespace ScoutsPAl.Services.ScoutsManagerAPI.Services
                 return false;
             }
 
-            var scout = _dbContext.Scouts.Find(scoutId);
-
-            return scout != null ? scout.IsActive == true : false;
+            try
+            {
+                var scout = _dbContext.Scouts.Find(scoutId);
+                _serilogLogger.Information($"ScoutRepository: Searched the following scout - {scoutId}");
+                return scout != null ? scout.IsActive == true : false;
+            }
+            catch (Exception ex)
+            {
+                _serilogLogger.Error(ex.Message, "ScoutRepository: There was a problem during the execution!");
+                throw;
+            }
+            
         }
     }
 }
